@@ -4,11 +4,10 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class Cross extends Shape {
 
-    private final float x, y, size;
+    private final float size;
 
     public Cross(float x, float y, float size) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.size = size;
     }
 

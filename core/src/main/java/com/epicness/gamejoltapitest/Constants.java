@@ -11,4 +11,10 @@ public class Constants {
     private static final float GRID_HEIGHT = GRID_ROWS * CELL_SIZE;
     public static final float GRID_X = WINDOW_SIZE / 2f - GRID_WIDTH / 2f;
     public static final float GRID_Y = WINDOW_SIZE / 2f - GRID_HEIGHT / 2f;
+
+    public static final float CIRCLE_RADIUS = CELL_SIZE * 0.4f;
+    public static final float CIRCLE_OFFSET = CELL_SIZE / 2f;
+
+    public static final float CROSS_SIZE = CELL_SIZE * 0.8f;
+    public static final float CROSS_OFFSET = CELL_SIZE / 2f - CROSS_SIZE / 2f;
 }

@@ -10,14 +10,13 @@ public class GameJoltAPITest extends Game {
 
     private Renderer renderer;
     private Logic logic;
-    private boolean d,g;
 
     @Override
     public void create() {
         GameJoltApi api = new GameJoltApi();
         Stuff stuff = new Stuff();
         renderer = new Renderer(stuff);
-        logic = new Logic(api);
+        logic = new Logic(api, stuff);
     }
 
     @Override

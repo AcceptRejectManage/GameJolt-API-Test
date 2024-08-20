@@ -4,7 +4,7 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class Cell {
 
-    private final float x, y, size;
+    public final float x, y, size;
     public Shape shape;
 
     public Cell(float x, float y, float size) {

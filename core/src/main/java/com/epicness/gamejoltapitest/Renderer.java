@@ -2,7 +2,6 @@ package com.epicness.gamejoltapitest;
 
 import static com.badlogic.gdx.graphics.Color.NAVY;
 
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,19 +12,22 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class Renderer {
 
+    private final SpriteBatch spriteBatch;
     private final ShapeDrawer shapeDrawer;
     private final Stuff stuff;
 
     public Renderer(Stuff stuff) {
-        shapeDrawer = new ShapeDrawer(new SpriteBatch(), new TextureRegion(new Texture("pixel.png")));
+        spriteBatch = new SpriteBatch();
+        shapeDrawer = new ShapeDrawer(spriteBatch, new TextureRegion(new Texture("pixel.png")));
         this.stuff = stuff;
     }
 
     public void render() {
         ScreenUtils.clear(NAVY);
 
-        shapeDrawer.getBatch().begin();
+        spriteBatch.begin();
+        stuff.getText().draw(spriteBatch);
         stuff.getGrid().draw(shapeDrawer);
-        shapeDrawer.getBatch().end();
+        spriteBatch.end();
     }
 }

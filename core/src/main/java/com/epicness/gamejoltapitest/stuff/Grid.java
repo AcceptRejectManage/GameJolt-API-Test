@@ -30,4 +30,11 @@ public class Grid {
             }
         }
     }
+
+    public Cell getCellAtPosition(float x, float y) {
+        int col = (int) ((x - GRID_X) / CELL_SIZE);
+        int row = (int) ((y - GRID_Y) / CELL_SIZE);
+        if (col < 0 || row < 0 || col >= cells.length || row >= cells[col].length) return null;
+        return cells[col][row];
+    }
 }
