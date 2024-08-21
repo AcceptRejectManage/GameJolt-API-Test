@@ -5,15 +5,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Text {
 
-    private final BitmapFont font;
+    public final BitmapFont font;
     public String text;
-    private final float x, y;
+    public float x, y;
 
-    public Text(BitmapFont font, float x, float y) {
+    public Text(BitmapFont font) {
         this.font = font;
-        text = "Welcome";
-        this.x = x;
-        this.y = y;
+        text = "";
     }
 
     public void draw(SpriteBatch spriteBatch) {

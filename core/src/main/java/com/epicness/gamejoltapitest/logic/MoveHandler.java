@@ -1,43 +1,35 @@
 package com.epicness.gamejoltapitest.logic;
 
 import static com.badlogic.gdx.Application.ApplicationType.Desktop;
-import static com.badlogic.gdx.Application.ApplicationType.WebGL;
 import static com.epicness.gamejoltapitest.Constants.CIRCLE_OFFSET;
 import static com.epicness.gamejoltapitest.Constants.CIRCLE_RADIUS;
 import static com.epicness.gamejoltapitest.Constants.CROSS_OFFSET;
 import static com.epicness.gamejoltapitest.Constants.CROSS_SIZE;
-import static com.epicness.gamejoltapitest.SecretInfo.GAME_ID;
-import static com.epicness.gamejoltapitest.SecretInfo.PRIVATE_KEY;
+import static com.epicness.gamejoltapitest.Constants.GRID_ROWS;
 
 import com.badlogic.gdx.Gdx;
+import com.epicness.gamejoltapitest.Listener;
 import com.epicness.gamejoltapitest.stuff.Cell;
 import com.epicness.gamejoltapitest.stuff.Circle;
 import com.epicness.gamejoltapitest.stuff.Cross;
 import com.epicness.gamejoltapitest.stuff.Grid;
 import com.epicness.gamejoltapitest.stuff.Shape;
 import com.epicness.gamejoltapitest.stuff.Text;
-import com.github.raeleus.gamejoltapi.GameJoltApi;
-import com.github.raeleus.gamejoltapi.GameJoltDataStore.DataStoreSetListener;
-import com.github.raeleus.gamejoltapi.GameJoltDataStore.DataStoreSetRequest;
-import com.github.raeleus.gamejoltapi.GameJoltDataStore.DataStoreSetValue;
 
 public class MoveHandler {
 
-    private final GameJoltApi api;
-    private final Text text;
+    private final Logic logic;
+    private final Text message;
     private final Grid grid;
-    private boolean player1Turn;
 
-    public MoveHandler(GameJoltApi api, Text text, Grid grid) {
-        this.api = api;
-        this.text = text;
+    public MoveHandler(Logic logic, Text message, Grid grid) {
+        this.logic = logic;
+        this.message = message;
         this.grid = grid;
-        player1Turn = true;
     }
 
     public void attemptMove(float x, float y) {
-        if (Gdx.app.getType() == Desktop && !player1Turn) return;
-        if (Gdx.app.getType() == WebGL && player1Turn) return;
+        if (!logic.getTurnHandler().isOurTurn()) return;
 
         Cell cell = grid.getCellAtPosition(x, y);
 
@@ -52,30 +44,34 @@ public class MoveHandler {
     }
 
     private void makeMove(Cell cell) {
-        DataStoreSetRequest request = DataStoreSetRequest.builder()
-            .gameID(GAME_ID)
-            .key("Test Key")
-            .data("Test Data")
-            .build();
-
-        api.sendRequest(request, PRIVATE_KEY, new DataStoreSetListener() {
+        message.text = "Attempting to make move";
+        logic.getAPIWrapper().updateGrid(makePotentialGrid(cell), new Listener() {
             @Override
-            public void dataStoreSet(DataStoreSetValue value) {
-                if (value.success) {
-                    cell.shape = makePlayerShape(cell);
-                    player1Turn = !player1Turn;
-                    text.text = "SUCCESS";
-                } else {
-                    System.out.println("FAIL");
-                }
+            public void onSuccess() {
+                cell.shape = makePlayerShape(cell);
+                logic.getTurnHandler().updateTurn();
+            }
+
+            @Override
+            public void onFail() {
+                message.text = "Failed to make move";
             }
         });
+    }
+
+    private String makePotentialGrid(Cell cell) {
+        int charIndex = cell.col * GRID_ROWS + cell.row;
+        char playerChar = Gdx.app.getType() == Desktop ? 'O' : 'X';
+
+        StringBuilder stringBuilder = new StringBuilder(grid.toData());
+        stringBuilder.setCharAt(charIndex, playerChar);
+        return stringBuilder.toString();
     }
 
     private Shape makePlayerShape(Cell cell) {
         Shape shape;
         float x = cell.x, y = cell.y;
-        if (player1Turn) {
+        if (Gdx.app.getType() == Desktop) {
             shape = new Circle(x + CIRCLE_OFFSET, y + CIRCLE_OFFSET, CIRCLE_RADIUS);
         } else {
             shape = new Cross(x + CROSS_OFFSET, y + CROSS_OFFSET, CROSS_SIZE);
