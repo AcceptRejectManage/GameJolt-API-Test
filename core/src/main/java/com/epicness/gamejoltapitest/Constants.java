@@ -18,4 +18,6 @@ public class Constants {
 
     public static final float CROSS_SIZE = CELL_SIZE * 0.8f;
     public static final float CROSS_OFFSET = CELL_SIZE / 2f - CROSS_SIZE / 2f;
+
+    public static final float POLL_INTERVAL = 5f;
 }

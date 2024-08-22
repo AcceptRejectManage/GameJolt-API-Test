@@ -14,11 +14,13 @@ import com.epicness.gamejoltapitest.stuff.Text;
 
 public class TurnHandler {
 
+    private final Logic logic;
     private final Grid grid;
     private final Text message;
     private boolean player1Turn;
 
-    public TurnHandler(Grid grid, Text message) {
+    public TurnHandler(Logic logic, Grid grid, Text message) {
+        this.logic = logic;
         this.grid = grid;
         this.message = message;
     }
@@ -39,6 +41,13 @@ public class TurnHandler {
         }
         player1Turn = xCount == oCount;
         message.text = player1Turn ? "Desktop Turn" : "Web Turn";
+        if (isOurTurn()) {
+            logic.getInputHandler().enabled = true;
+            logic.getPoller().stop();
+        } else {
+            logic.getInputHandler().enabled = false;
+            logic.getPoller().begin();
+        }
     }
 
     public boolean isOurTurn() {

@@ -18,12 +18,12 @@ public class StateHandler {
     }
 
     public void loadGridState() {
+        message.text = "Loading game state";
         logic.getAPIWrapper().fetchGrid(new DataListener<>() {
             @Override
             public void onSuccess(String gridData) {
                 Utils.loadGridData(grid, gridData);
                 logic.getTurnHandler().updateTurn();
-                logic.getInputHandler().enabled = true;
             }
 
             @Override

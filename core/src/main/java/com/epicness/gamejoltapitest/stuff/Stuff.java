@@ -10,17 +10,26 @@ import com.epicness.gamejoltapitest.Utils;
 
 public class Stuff {
 
+    private final Text timerText;
     private final Text message;
     private final Grid grid;
 
     public Stuff() {
+        timerText = new Text(new BitmapFont());
+        timerText.x = WINDOW_WIDTH/2f;
+        timerText.y = 600f;
+        timerText.text = "Timer Stopped";
+
         message = new Text(new BitmapFont());
-        message.text = "Loading game state";
         Vector2 size = Utils.getTextSize(message.font, message.text);
         message.x = WINDOW_WIDTH / 2f - size.x / 2f;
         message.y = 100f;
 
         grid = new Grid(GRID_COLS, GRID_ROWS);
+    }
+
+    public Text getTimerText() {
+        return timerText;
     }
 
     public Text getMessage() {

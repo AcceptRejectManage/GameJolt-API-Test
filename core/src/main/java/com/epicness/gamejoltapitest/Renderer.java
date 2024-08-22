@@ -26,6 +26,7 @@ public class Renderer {
         ScreenUtils.clear(NAVY);
 
         spriteBatch.begin();
+        stuff.getTimerText().draw(spriteBatch);
         stuff.getMessage().draw(spriteBatch);
         stuff.getGrid().draw(shapeDrawer);
         spriteBatch.end();
