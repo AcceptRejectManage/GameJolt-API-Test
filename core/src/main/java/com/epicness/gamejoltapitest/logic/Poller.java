@@ -2,6 +2,7 @@ package com.epicness.gamejoltapitest.logic;
 
 import static com.epicness.gamejoltapitest.Constants.POLL_INTERVAL;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.epicness.gamejoltapitest.DataListener;
 import com.epicness.gamejoltapitest.Utils;
 import com.epicness.gamejoltapitest.stuff.Grid;
@@ -25,14 +26,14 @@ public class Poller {
     public void begin() {
         timer = 0f;
         enabled = true;
-        timerText.text = String.valueOf(Math.floor(timer));
+        timerText.text = String.valueOf(MathUtils.floor(timer));
     }
 
     public void update(float delta) {
         if (!enabled) return;
 
         timer += delta;
-        timerText.text = String.valueOf(Math.floor(timer));
+        timerText.text = String.valueOf(MathUtils.floor(timer));
         if (timer >= POLL_INTERVAL) {
             poll();
             timer = Math.min(timer - POLL_INTERVAL, 0f);
