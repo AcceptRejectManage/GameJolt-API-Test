@@ -14,6 +14,10 @@ public class Text {
         text = "";
     }
 
+    public Text() {
+        this(new BitmapFont());
+    }
+
     public void draw(SpriteBatch spriteBatch) {
         font.draw(
             spriteBatch,

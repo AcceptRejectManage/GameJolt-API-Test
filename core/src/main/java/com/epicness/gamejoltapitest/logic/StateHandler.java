@@ -24,6 +24,7 @@ public class StateHandler {
             public void onSuccess(String gridData) {
                 Utils.loadGridData(grid, gridData);
                 logic.getTurnHandler().updateTurn();
+                logic.getEndChecker().check();
             }
 
             @Override

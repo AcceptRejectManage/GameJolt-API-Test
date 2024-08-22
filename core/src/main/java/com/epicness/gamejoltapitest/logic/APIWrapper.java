@@ -58,4 +58,8 @@ public class APIWrapper {
             }
         });
     }
+
+    public void resetGrid(Listener listener) {
+        updateGrid("AAAAAAAAA", listener);
+    }
 }

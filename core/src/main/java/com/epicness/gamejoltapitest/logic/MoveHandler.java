@@ -30,6 +30,7 @@ public class MoveHandler {
 
     public void attemptMove(float x, float y) {
         if (!logic.getTurnHandler().isOurTurn()) return;
+        if (grid.isFull()) return;
 
         Cell cell = grid.getCellAtPosition(x, y);
 
@@ -50,6 +51,7 @@ public class MoveHandler {
             public void onSuccess() {
                 cell.shape = makePlayerShape(cell);
                 logic.getTurnHandler().updateTurn();
+                logic.getEndChecker().check();
             }
 
             @Override

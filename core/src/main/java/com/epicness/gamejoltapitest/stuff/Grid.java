@@ -50,13 +50,29 @@ public class Grid {
         return gridData.toString();
     }
 
+    public void clear() {
+        for (int col = 0; col < GRID_COLS; col++) {
+            for (int row = 0; row < GRID_ROWS; row++) {
+                cells[col][row].shape = null;
+            }
+        }
+    }
+
     public boolean isEmpty() {
-        boolean empty = true;
         for (int col = 0; col < GRID_COLS; col++) {
             for (int row = 0; row < GRID_ROWS; row++) {
                 if (cells[col][row].shape != null) return false;
             }
         }
-        return empty;
+        return true;
+    }
+
+    public boolean isFull() {
+        for (int col = 0; col < GRID_COLS; col++) {
+            for (int row = 0; row < GRID_ROWS; row++) {
+                if (cells[col][row].shape == null) return false;
+            }
+        }
+        return true;
     }
 }

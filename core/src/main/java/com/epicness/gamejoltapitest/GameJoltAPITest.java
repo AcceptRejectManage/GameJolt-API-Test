@@ -32,18 +32,4 @@ public class GameJoltAPITest extends Game {
             renderer.render();
         }
     }
-
-    private void initGrid(GameJoltApi api) {
-        GameJoltDataStore.DataStoreSetRequest request = GameJoltDataStore.DataStoreSetRequest.builder()
-            .gameID(GAME_ID)
-            .key(GRID_KEY)
-            .data("AAAAAAAAA")
-            .build();
-        api.sendRequest(request, PRIVATE_KEY, new GameJoltDataStore.DataStoreSetListener() {
-            @Override
-            public void dataStoreSet(GameJoltDataStore.DataStoreSetValue value) {
-                System.out.println("Init grid: " + value.success);
-            }
-        });
-    }
 }

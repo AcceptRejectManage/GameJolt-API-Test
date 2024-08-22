@@ -18,7 +18,9 @@ public class InputHandler extends InputAdapter {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if (!enabled) return false;
 
-        logic.getMoveHandler().attemptMove(screenX, Gdx.graphics.getHeight() - screenY);
+        screenY = Gdx.graphics.getHeight() - screenY;
+        logic.getMoveHandler().attemptMove(screenX, screenY);
+        logic.getRestartHandler().touchDown(screenX, screenY);
         return false;
     }
 }
