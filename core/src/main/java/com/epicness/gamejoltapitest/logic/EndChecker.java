@@ -18,15 +18,21 @@ public class EndChecker {
 
     public void check() {
         if (check('X')) {
+            gameEnded();
             message.text = "Web player wins!";
         } else if (check('O')) {
+            gameEnded();
             message.text = "Desktop player wins!";
         } else if (grid.isFull()) {
+            gameEnded();
             message.text = "Tie!";
-            logic.getPoller().stop();
-            logic.getRestartHandler().showRestart();
-            logic.getInputHandler().enabled = true;
         }
+    }
+
+    private void gameEnded() {
+        logic.getPoller().stop();
+        logic.getRestartHandler().showRestart();
+        logic.getInputHandler().enabled = true;
     }
 
     private boolean check(char player) {
