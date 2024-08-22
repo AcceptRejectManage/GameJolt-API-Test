@@ -34,8 +34,8 @@ public class RestartHandler {
                 @Override
                 public void onSuccess() {
                     hideRestart();
-                    logic.getTurnHandler().updateTurn();
                     grid.clear();
+                    logic.getTurnHandler().updateTurn();
                     logic.getEndChecker().gameEnded = false;
                 }
 
