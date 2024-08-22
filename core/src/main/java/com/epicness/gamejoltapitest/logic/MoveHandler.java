@@ -30,7 +30,7 @@ public class MoveHandler {
 
     public void attemptMove(float x, float y) {
         if (!logic.getTurnHandler().isOurTurn()) return;
-        if (grid.isFull()) return;
+        if (logic.getEndChecker().gameEnded) return;
 
         Cell cell = grid.getCellAtPosition(x, y);
 

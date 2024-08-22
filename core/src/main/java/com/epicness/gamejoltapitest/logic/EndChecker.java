@@ -9,6 +9,7 @@ public class EndChecker {
     private final Logic logic;
     private final Grid grid;
     private final Text message;
+    public boolean gameEnded;
 
     public EndChecker(Logic logic, Grid grid, Text message) {
         this.logic = logic;
@@ -33,6 +34,7 @@ public class EndChecker {
         logic.getPoller().stop();
         logic.getRestartHandler().showRestart();
         logic.getInputHandler().enabled = true;
+        gameEnded = true;
     }
 
     private boolean check(char player) {
