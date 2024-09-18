@@ -1,15 +1,10 @@
 package com.epicness.gamejoltapitest;
 
-import static com.epicness.gamejoltapitest.SecretInfo.GAME_ID;
-import static com.epicness.gamejoltapitest.SecretInfo.GRID_KEY;
-import static com.epicness.gamejoltapitest.SecretInfo.PRIVATE_KEY;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.epicness.gamejoltapitest.logic.Logic;
 import com.epicness.gamejoltapitest.stuff.Stuff;
 import com.github.raeleus.gamejoltapi.GameJoltApi;
-import com.github.raeleus.gamejoltapi.GameJoltDataStore;
 
 public class GameJoltAPITest extends Game {
 
